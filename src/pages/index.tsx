@@ -1,9 +1,8 @@
-import { useBreakpointValue, Flex, Spacer, Divider, Text } from '@chakra-ui/react';
+import { useBreakpointValue, Flex, Spacer, Divider, Text, Link } from '@chakra-ui/react';
 import { Header } from '../components/Header';
 import styles from '../styles/home.module.scss';
 import { NavLink } from '../components/NavLink';
 import React, { useState } from 'react';
-import { Photo } from '../components/Photo';
 import { unsplashApi, PhotoProps } from '../services/upsplash';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
@@ -39,41 +38,57 @@ export default function Home(props: HomeProps) {
 
     {
       title: "América do Norte",
-      subtitle: "O continente mais antigo",
-      imageUrl: "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMjEwNzZ8MHwxfGFsbHx8fHx8fHx8fDE2MTc3OTI2MDg&ixlib=rb-1.2.1&q=80&w=1080"
+      subtitle: "A modernidade das metópoles",
+      imageUrl: "https://images.unsplash.com/photo-1570897620600-f5f649e4968c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMjEwNzZ8MHwxfGFsbHx8fHx8fHx8fDE2MTc4MTMxNzk&ixlib=rb-1.2.1&q=80&w=1080"
     },
 
     {
       title: "América do Sul",
-      subtitle: "O continente mais antigo",
-      imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMjEwNzZ8MHwxfGFsbHx8fHx8fHx8fDE2MTc4MDIzMDQ&ixlib=rb-1.2.1&q=80&w=1080"
+      subtitle: "A violência da colonização",
+      imageUrl: "https://images.unsplash.com/photo-1589228710553-095226fc298b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMjEwNzZ8MHwxfGFsbHx8fHx8fHx8fDE2MTc4MTMzNDU&ixlib=rb-1.2.1&q=80&w=1080"
     },
 
     {
+      title: "Ásia",
+      subtitle: "Cultura milenar",
+      imageUrl: "https://images.unsplash.com/photo-1513415756790-2ac1db1297d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMjEwNzZ8MHwxfGFsbHx8fHx8fHx8fDE2MTc4MTM2Mjc&ixlib=rb-1.2.1&q=80&w=1080"
+    },
+    {
+      title: "África",
+      subtitle: "Natureza intocada",
+      imageUrl: "https://images.unsplash.com/photo-1528277342758-f1d7613953a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMjEwNzZ8MHwxfGFsbHx8fHx8fHx8fDE2MTc4MTM3NjU&ixlib=rb-1.2.1&q=80&w=1080"
+    },
+    {
       title: "Europa",
       subtitle: "O continente mais antigo",
-      imageUrl: "https://images.unsplash.com/photo-1471922694854-ff1b63b20054?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMjEwNzZ8MHwxfGFsbHx8fHx8fHx8fDE2MTc4MDIzNTU&ixlib=rb-1.2.1&q=80&w=1080"
+      imageUrl: "https://images.unsplash.com/photo-1520114878144-6123749968dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMjEwNzZ8MHwxfGFsbHx8fHx8fHx8fDE2MTc4MTI3OTc&ixlib=rb-1.2.1&q=80&w=1080"
+    },
+    {
+      title: "Oceania",
+      subtitle: "A maravilha das ilhas",
+      imageUrl: "https://images.unsplash.com/photo-1572295215355-60431b92883f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMjEwNzZ8MHwxfGFsbHx8fHx8fHx8fDE2MTc4MTM4Njk&ixlib=rb-1.2.1&q=80&w=1080"
     },
   ]
-  for (let i = 0; i < 3; i += 1) {
+  for (let i = 0; i < 6; i += 1) {
     slides.push(
+
       <SwiperSlide key={`slide-${i}`} >
-        <div style={{ position: "relative" }}>
-          <img
-            src={continentsInfo[i].imageUrl}
-            alt={`Slide ${i}`}
-          />
-
-          <Text lineHeight="72px" color="black" fontWeight="700" fontSize="48px">
-            {continentsInfo[i].title}
-          </Text>
-          <Text lineHeight="36px" color="white" fontWeight="700" fontSize="24px">
-            {continentsInfo[i].subtitle}
-
-
-          </Text>
+        <img
+          src={continentsInfo[i].imageUrl}
+          alt={`Slide ${i}`}
+          style={{ filter: "brightness(60%)" }}
+        />
+        <div style={{ position: "absolute", top: "180px", width: "100%" }}>
+          <Link style={{ textDecoration: "none" }} href="/">
+            <Text align="center" data-swiper-parallax="-100" lineHeight="72px" color="white" fontWeight="700" fontSize="48px">
+              {continentsInfo[i].title}
+            </Text>
+            <Text data-swiper-parallax="-200" lineHeight="36px" color="white" fontWeight="700" fontSize="24px">
+              {continentsInfo[i].subtitle}
+            </Text>
+          </Link>
         </div>
-      </SwiperSlide>
+      </SwiperSlide >
     );
   };
 
@@ -85,7 +100,7 @@ export default function Home(props: HomeProps) {
         <img src={banner} alt="5 continentes - infinitas possibilidades" />
       </div>
 
-      <Flex maxW="1140px" mt="4rem" mx="auto">
+      <Flex maxW="1080px" mt="4rem" mx="auto">
 
         <NavLink image="cocktail.svg" href="/">vida noturna</NavLink>
         <Spacer />
@@ -128,10 +143,12 @@ export async function getStaticProps() {
 
   try {
     response = await unsplashApi.photos
-      .get({ photoId: "OD9EOzfSOh0" });
+      .get({ photoId: "cOT7bImb07A" });
   } catch {
     console.log("something went wrong!");
   }
+
+  console.log(response.response.urls.regular);
 
   return {
     props: {

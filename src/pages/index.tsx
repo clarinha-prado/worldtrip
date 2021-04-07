@@ -1,8 +1,7 @@
-import { useBreakpointValue, Flex, Spacer, Divider, Text, Link } from '@chakra-ui/react';
+import { useBreakpointValue, Flex, Box, Divider, Text, Link } from '@chakra-ui/react';
 import { Header } from '../components/Header';
 import styles from '../styles/home.module.scss';
 import { NavLink } from '../components/NavLink';
-import React, { useState } from 'react';
 import { unsplashApi, PhotoProps } from '../services/upsplash';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination } from 'swiper';
@@ -15,11 +14,6 @@ interface HomeProps {
 SwiperCore.use([Navigation, Pagination]);
 
 export default function Home(props: HomeProps) {
-
-  const photoIds = [
-    'q1XSXdBlOik',
-
-  ]
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -78,16 +72,16 @@ export default function Home(props: HomeProps) {
           alt={`Slide ${i}`}
           style={{ filter: "brightness(60%)" }}
         />
-        <div style={{ position: "absolute", top: "180px", width: "100%" }}>
+        <Box w="100%" position="absolute" top={["80px", "140px", "180px"]} >
           <Link style={{ textDecoration: "none" }} href="/">
-            <Text align="center" data-swiper-parallax="-100" lineHeight="72px" color="white" fontWeight="700" fontSize="48px">
+            <Text align="center" lineHeight={["36px", "48px", "72px"]} color="white" fontWeight="700" fontSize={["24px", "36px", "48px"]}>
               {continentsInfo[i].title}
             </Text>
-            <Text data-swiper-parallax="-200" lineHeight="36px" color="white" fontWeight="700" fontSize="24px">
+            <Text align="center" lineHeight={["21px", "15px", "36px"]} color="white" fontWeight="700" fontSize={["14px", "19px", "24px"]}>
               {continentsInfo[i].subtitle}
             </Text>
           </Link>
-        </div>
+        </Box>
       </SwiperSlide >
     );
   };
@@ -100,30 +94,35 @@ export default function Home(props: HomeProps) {
         <img src={banner} alt="5 continentes - infinitas possibilidades" />
       </div>
 
-      <Flex maxW="1080px" mt="4rem" mx="auto">
+      <Flex
+        wrap={(isWideVersion ? ("nowrap") : ("wrap"))}
+        direction="row"
+        w="100%"
+        maxW="1080px"
+        mt={["1.3rem", "2.3rem", "4rem"]}
+        mx="auto"
+        px={["10px", "10px", "5px"]}
+        justify="center"
+      >
 
-        <NavLink image="cocktail.svg" href="/">vida noturna</NavLink>
-        <Spacer />
-        <NavLink image="surf.svg" href="/">praia</NavLink>
-        <Spacer />
-        <NavLink image="building.svg" href="/">moderno</NavLink>
-        <Spacer />
-        <NavLink image="museum.svg" href="/">clássico</NavLink>
-        <Spacer />
+        <NavLink mr={["0%", "3%", "0%", "3%"]} image="cocktail.svg" href="/">vida noturna</NavLink>
+        <NavLink mr={["0%", "3%", "0%", "3%"]} image="surf.svg" href="/">praia</NavLink>
+        <NavLink mr={["0%", "3%", "0%", "3%"]} image="building.svg" href="/">moderno</NavLink>
+        <NavLink mr={["0%", "3%", "0%", "3%"]} image="museum.svg" href="/">clássico</NavLink>
         <NavLink image="earth.svg" href="/">e mais...</NavLink>
 
       </Flex>
 
       <Flex w="100%" align="center" direction="column">
-        <Divider mt="5rem" mb="3.25rem" w="5.63rem" border="2px" borderColor="gray.400" opacity="1" />
+        <Divider mt={["24px", "24px", "5rem"]} mb={["24px", "24px", "3.25rem"]} w={["3.375rem", "3.375rem", "5.63rem"]} h={["1px", "1px", "2px"]} bg="gray.400" opacity="1" />
 
-        <Text fontWeight="500" fontSize="2.25rem" lineHeight="3.375rem" align="center" mb="3rem">
+        <Text fontWeight="500" fontSize={["20px", "20px", "2.25rem"]} lineHeight={["30px", "30px", "3.375rem"]} align="center" mb={["20px", "20px", "3rem"]}>
           Vamos nessa?<br />
           Então escolha seu continente
       </Text>
 
         <Swiper
-          className=""
+
           id="main"
           navigation
           pagination

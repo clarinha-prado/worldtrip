@@ -1,9 +1,29 @@
 
 .banner {
-    width: 100%;
+    width: 100vw;
     left: 0;
 
     img {
-        width: 100%;
+        width: 100vw;
     }
 }
+  
+.mytext { 
+    position: "absolute"; 
+    top: "180px";
+    width: "100%";
+}
+
+@media screen and (min-width: 640px) {
+   
+    .mytext { 
+        top: "100px";
+    } 
+}
+  
+  @media screen and (min-width: 768px) {
+   
+    .mytext { 
+        top: "70px";
+    } 
+  }

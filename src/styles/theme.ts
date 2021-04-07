@@ -32,11 +32,20 @@ export const theme = extendTheme({
     layerStyles: {
         menu: {
             fontWeight: "semibold",
-            fontSize: "1.5rem",
+            fontSize: "1.3rem",
             align: "center",
-            lineHeight: "2.25rem",
+            lineHeight: "2rem",
             fontFamily: 'Poppins, sans-serif',
         },
+
+        menuMobile: {
+            fontWeight: "500",
+            fontSize: "18px",
+            align: "center",
+            lineHeight: "20px",
+            fontFamily: 'Poppins, sans-serif',
+        },
+
         /*         text: {
                     bg: "teal.500",
                     color: "teal.700",

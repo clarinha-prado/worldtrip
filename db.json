@@ -1,0 +1,96 @@
+{
+    "continents": [
+        {
+            "id": 1,
+            "name": "Europa",
+            "subtitle": "O mais antigo continente",
+            "photoHomePageId": "x",
+            "countriesQtt": 51,
+            "idiomsQtt": 61,
+            "cities100Qtt": 28,
+            "cities": [
+                {
+                    "id": 1,
+                    "name": "Londres",
+                    "country": "Reino Unido",
+                    "countryAbbrev": "GB",
+                    "photoId": "Q6UehpkBSnQ"
+                },
+                {
+                    "id": 2,
+                    "name": "Paris",
+                    "country": "França",
+                    "countryAbbrev": "FR",
+                    "photoId": "R5scocnOOdM"
+                },
+                {
+                    "id": 3,
+                    "name": "Roma",
+                    "country": "Itália",
+                    "countryAbbrev": "IT",
+                    "photoId": "VUG96jF8Gr0"
+                },
+                {
+                    "id": 4,
+                    "name": "Praga",
+                    "country": "República Tcheca",
+                    "countryAbbrev": "CZ",
+                    "photoId": "qlrNoIBd_Zs"
+                },
+                {
+                    "id": 5,
+                    "name": "Amsterdã",
+                    "country": "Holanda",
+                    "countryAbbrev": "NL",
+                    "photoId": "VEXIwDcY1gw"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Oceania",
+            "subtitle": "As maravilhosas ilhas",
+            "photoHomePageId": "x",
+            "countriesQtt": 51,
+            "idiomsQtt": 61,
+            "cities100Qtt": 28,
+            "cities": [
+                {
+                    "id": 1,
+                    "name": "Londres",
+                    "country": "Reino Unido",
+                    "countryAbbrev": "GB",
+                    "photoId": "a"
+                },
+                {
+                    "id": 2,
+                    "name": "Paris",
+                    "country": "França",
+                    "countryAbbrev": "FR",
+                    "photoId": "a"
+                },
+                {
+                    "id": 3,
+                    "name": "Roma",
+                    "country": "Itália",
+                    "countryAbbrev": "IT",
+                    "photoId": "a"
+                },
+                {
+                    "id": 4,
+                    "name": "Praga",
+                    "country": "República Tcheca",
+                    "countryAbbrev": "CZ",
+                    "photoId": "a"
+                },
+                {
+                    "id": 5,
+                    "name": "Amsterdã",
+                    "country": "Holanda",
+                    "countryAbbrev": "NL",
+                    "photoId": "a"
+                }
+            ]
+        }
+    ]
+}

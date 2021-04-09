@@ -6,7 +6,7 @@ interface PhotoComponentProps {
 
 export const Photo = (props: PhotoComponentProps) => {
 
-  console.log(props.photoInfo.urls.regular);
+  // console.log(props.photoInfo.urls.regular);
 
   return (
     <div className="feed">

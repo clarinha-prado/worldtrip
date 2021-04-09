@@ -73,7 +73,7 @@ export default function Home(props: HomeProps) {
           style={{ filter: "brightness(60%)" }}
         />
         <Box w="100%" position="absolute" top={["80px", "140px", "180px"]} >
-          <Link style={{ textDecoration: "none" }} href="/">
+          <Link style={{ textDecoration: "none" }} href="/europe">
             <Text align="center" lineHeight={["36px", "48px", "72px"]} color="white" fontWeight="700" fontSize={["24px", "36px", "48px"]}>
               {continentsInfo[i].title}
             </Text>

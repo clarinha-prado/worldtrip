@@ -17,11 +17,11 @@ export function NavLink({ image = null, children, href, ...rest }: NavLinkProps)
     if (isWideVersion) {
         return (
             <ChakraLink {...rest} >
-                <Flex direction="column" justify="space-between" w="8.87rem" h="8.01rem" align="center" >
+                <Flex direction="column" justify="space-between" h="8.01rem" align="center" >
                     <Image boxSize={["0.5rem", "1rem", "4.3rem"]} src={image}>
 
                     </Image>
-                    <Text fontFamily="Poppins, sans-serif" layerStyle="menu">{children}</Text>
+                    <Text align="center" fontFamily="Poppins, sans-serif" layerStyle="menu">{children}</Text>
                 </Flex>
             </ChakraLink>
 
@@ -29,7 +29,7 @@ export function NavLink({ image = null, children, href, ...rest }: NavLinkProps)
     } else {
         return (
             <ChakraLink {...rest} >
-                <Flex w="8.87rem" h={["2.7rem", "3.3rem", "5rem"]} align="center" justify="center" >
+                <Flex align="center" justify="center" >
                     <Image mr="0.5rem" boxSize={["0.5rem", "0.5rem", "5.3rem"]} src="bullet.svg">
                     </Image>
                     <Text fontFamily="Poppins, sans-serif" layerStyle="menuMobile">{children}</Text>

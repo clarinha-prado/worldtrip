@@ -1,12 +1,11 @@
-import { useBreakpointValue, Flex, Text } from '@chakra-ui/react';
-import { Header } from '../components/Header';
-import { unsplashApi } from '../services/upsplash';
+import { useBreakpointValue, Box, Flex, Text } from '@chakra-ui/react';
+import { Header } from '../../components/Header';
+import { unsplashApi } from '../../services/upsplash';
 import { RiInformationLine } from 'react-icons/ri';
-import { api } from '../services/api';
-import { CityList } from '../components/CityList';
+import { api } from '../../services/api';
+import { CityList } from '../../components/CityList';
 
 interface HomeProps {
-  // photo: PhotoProps;
   continent: ContinentProps;
   url: string;
 }
@@ -49,18 +48,21 @@ export default function Home(props: HomeProps) {
         bgImage={`url(${bannerEurope})`}
         bgPosition={["100% 40%", "100% 50%"]}
         bgRepeat="no-repeat"
-        bgSize="cover"      >
+        bgSize="cover"
+        class="teste"
+      >
 
         <Flex
-          align={["center", "flex-end"]}
           justify={["center", "flex-start"]}
-          maxW="1160px"
           w="100%"
           mx="auto"
+          align={["center", "flex-end"]}
           pl={["0px", "70px", "140px"]}
         >
 
           <Text
+            align={["center", "left"]}
+            w="100%"
             color="white"
             fontWeight="600"
             fontSize={["20px", "32px", "48px"]}
@@ -74,13 +76,13 @@ export default function Home(props: HomeProps) {
 
       </Flex>
 
-      <Flex direction="column" my="80px" mx={["3%", "4%", "5%", "9%"]} >
+      <Flex direction="column" my={["24px", "42px", "60px", "80px"]} mx={["3%", "4%", "5%", "9%"]} >
         <Flex direction={["column", "column", "column", "row"]} mb={["20px", "20px", "3rem"]}>
           <Text
             mr={["0px", "0px", "0px", "70px"]}
             fontWeight="400"
-            fontSize={["20px", "20px", "24px"]}
-            lineHeight={["30px", "30px", "36px"]}
+            fontSize={["14px", "19px", "24px"]}
+            lineHeight={["21px", "30px", "36px"]}
             align="justify"
           >
             A Europa é, por convenção, um dos seis continentes do mundo. Compreendendo a península ocidental da Eurásia, a Europa geralmente divide-se da Ásia a leste pela divisória de águas dos montes Urais, o rio Ural, o mar Cáspio, o Cáucaso, e o mar Negro a sudeste.
@@ -89,36 +91,38 @@ export default function Home(props: HomeProps) {
             align="center"
             justify="center"
             direction={["row"]}
-            mt={["20px", "20px", "48px", "0px"]}
+            mt={["16px", "20px", "48px", "0px"]}
           >
 
-            <Flex mr="50px" direction="column">
-              <Text align="center" color="yellow.400" fontSize="48px" fontWeight="600" lineHeight="62px">
+            <Flex mr="50px" direction="column" align={["start", "center"]}>
+              <Text align="center" color="yellow.400" fontSize={["24px", "48px"]} fontWeight="600" lineHeight={["36px", "62px"]}>
                 {props.continent.countriesQtt}
               </Text>
-              <Text align="center" fontSize="24px" fontWeight="600" lineHeight="36px">
+              <Text align="center" fontSize={["18px", "24px"]} fontWeight={["400", "600"]} lineHeight={["27px", "36px"]}>
                 países
               </Text>
             </Flex>
 
-            <Flex mr="50px" direction="column">
-              <Text align="center" color="yellow.400" fontSize="48px" fontWeight="600" lineHeight="62px">
+            <Flex mr="50px" direction="column" align={["start", "center"]}>
+              <Text align="center" color="yellow.400" fontSize={["24px", "48px"]} fontWeight="600" lineHeight={["36px", "62px"]}>
                 {props.continent.idiomsQtt}
               </Text>
-              <Text align="center" fontSize="24px" fontWeight="600" lineHeight="36px">
+              <Text align="center" fontSize={["18px", "24px"]} fontWeight={["400", "600"]} lineHeight={["27px", "36px"]}>
                 línguas
               </Text>
             </Flex>
 
-            <Flex w="188px" direction="column">
-              <Text align="center" color="yellow.400" fontSize="48px" fontWeight="600" lineHeight="62px">
+            <Flex w="188px" direction="column" align={["start", "center"]}>
+              <Text align="center" color="yellow.400" fontSize={["24px", "48px"]} fontWeight="600" lineHeight={["36px", "62px"]}>
                 {props.continent.cities100Qtt}
               </Text>
               <Flex direction="row" align="center">
-                <Text align="center" mr="9px" fontSize="24px" fontWeight="600" lineHeight="36px">
+                <Text align="center" fontSize={["18px", "24px"]} fontWeight={["400", "600"]} lineHeight={["27px", "36px"]}>
                   cidades +100
                 </Text>
-                <RiInformationLine color="gray.300" opacity="0.5" size="19px" />
+                <Box w={["10px", "19px"]} ml={["10px", "5px"]}>
+                  <RiInformationLine color="gray.300" opacity="0.5" size="100%" />
+                </Box>
               </Flex>
             </Flex>
 
@@ -126,7 +130,15 @@ export default function Home(props: HomeProps) {
         </Flex>
 
         <Flex direction="column">
-          <Text mb="40px" fontSize="36px" fontWeight="500" lineHeight="54px">Cidades +100</Text>
+          <Text
+            mb={["20px", "40px"]}
+            fontSize={["24px", "36px"]}
+            fontWeight="500"
+            lineHeight={["36px", "54px"]}
+            w="100%"
+          >
+            Cidades +100
+            </Text>
 
           <CityList param={props.continent.cities} />
 
@@ -136,6 +148,15 @@ export default function Home(props: HomeProps) {
       <Flex h="3.25rem"></Flex>
     </>
   );
+}
+export async function getStaticPaths() {
+  return {
+    paths: [
+      // só gerar em tempo de build a página Europa
+      { params: { id: '1' } }
+    ],
+    fallback: true
+  };
 }
 
 export async function getStaticProps() {

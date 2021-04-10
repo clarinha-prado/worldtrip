@@ -26,6 +26,23 @@ export const theme = extendTheme({
                 bg: 'gray.100',
                 color: 'gray.400',
                 fontFamily: 'Poppins, sans-serif',
+            },
+            ".swiper-button-next": {
+                _after: {
+                    color: 'yellow.500'
+                }
+            },
+            ".swiper-button-prev": {
+                _after: {
+                    color: 'gray.400'
+                }
+            },
+            ".swiper-pagination-bullet": {
+                bg: '#999999',
+                opacity: 0.9
+            },
+            ".swiper-pagination-bullet-active": {
+                bg: 'yellow.400'
             }
         }
     },

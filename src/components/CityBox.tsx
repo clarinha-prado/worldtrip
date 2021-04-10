@@ -24,7 +24,8 @@ export function CityBox(props: CityBoxProps) {
         >     {/* cxa da miniatura + cxa de baixo */}
             <Image
                 borderRadius="4px 4px 0 0"
-                h="176px"
+                h="173px"
+                w="256px"
                 fit="cover"
                 src={props.param.photoUrl}
                 alt={props.param.name}

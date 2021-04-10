@@ -1,5 +1,6 @@
 import { CityBox } from '../components/CityBox';
-import { useBreakpointValue, Flex, Text, SimpleGrid } from '@chakra-ui/react';
+import { useBreakpointValue, Wrap, WrapItem } from '@chakra-ui/react';
+import React from 'react';
 
 interface CityProps {
     id: number;
@@ -16,14 +17,17 @@ interface CityListProps {
 export function CityList(props: CityListProps) {
 
     return (
-        <SimpleGrid columns={4} spacing="45px">
-
+        <Wrap
+            spacing="45px"
+            justify={["center", "center", "center", "flex-start"]}
+        >
             {props.param.map(city => {
                 return (
-                    <CityBox key={city.id} param={city} />
+                    <WrapItem key={city.id}>
+                        <CityBox param={city} />
+                    </WrapItem>
                 );
             })}
-
-        </SimpleGrid>
+        </Wrap>
     );
 }

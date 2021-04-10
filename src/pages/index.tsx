@@ -79,7 +79,7 @@ export default function Home(props: HomeProps) {
           style={{ filter: "brightness(60%)" }}
         />
         <Box w="100%" position="absolute" top={["80px", "140px", "180px"]} >
-          <Link style={{ textDecoration: "none" }} href="/europe">
+          <Link style={{ textDecoration: "none" }} href="/continents/1">
             <Text align="center" lineHeight={["36px", "48px", "72px"]} color="white" fontWeight="700" fontSize={["24px", "36px", "48px"]}>
               {continentsInfo[i].title}
             </Text>
@@ -96,9 +96,9 @@ export default function Home(props: HomeProps) {
     <>
       <Header />
 
-      <div className={styles.banner}>
-        <img src={banner} alt="5 continentes - infinitas possibilidades" />
-      </div>
+      <Flex w="100vw">
+        <Image w="100%" src={banner} alt="5 continentes - infinitas possibilidades" />
+      </Flex>
 
       <Wrap
         mt={["20px", "32px"]}
@@ -159,11 +159,9 @@ export async function getStaticProps() {
   try {
     response = await unsplashApi.photos
       .get({ photoId: "cOT7bImb07A" });
-  } catch {
-    console.log("something went wrong!");
+  } catch (err) {
+    console.log("erro na busca de imagem: " + err.message);
   }
-
-  console.log(response.response.urls.regular);
 
   return {
     props: {

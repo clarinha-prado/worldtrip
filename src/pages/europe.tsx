@@ -1,7 +1,6 @@
-import { useBreakpointValue, Flex, Image, Text } from '@chakra-ui/react';
+import { useBreakpointValue, Flex, Text } from '@chakra-ui/react';
 import { Header } from '../components/Header';
-import styles from '../styles/europe.module.scss';
-import { unsplashApi, PhotoProps } from '../services/upsplash';
+import { unsplashApi } from '../services/upsplash';
 import { RiInformationLine } from 'react-icons/ri';
 import { api } from '../services/api';
 import { CityList } from '../components/CityList';
@@ -45,32 +44,53 @@ export default function Home(props: HomeProps) {
     <>
       <Header />
 
-      <div className={styles.bannerContinent}>
-        <Image
-          htmlWidth="100vw"
-          fit="cover"
-          src={bannerEurope}
-          alt={`${props.continent.name} - ${props.continent.subtitle}`}
-          style={{ filter: "brightness(60%)" }}
-        />
-        <Text
-          fontWeight="600"
-          fontSize={["20px", "20px", "48px"]}
-          lineHeight={["30px", "30px", "72px"]}
-          color="white"
-          ml="140px"
-          style={{ position: "absolute", top: "441px" }}
-        >
-          {props.continent.name}
-        </Text>
-      </div>
+      <Flex
+        h={["150px", "225px", "300px", "500px"]}
+        bgImage={`url(${bannerEurope})`}
+        bgPosition={["100% 40%", "100% 50%"]}
+        bgRepeat="no-repeat"
+        bgSize="cover"      >
 
-      <Flex direction="column" my="80px" mx="140px" >
-        <Flex mb={["20px", "20px", "3rem"]}>
-          <Text mr="70px" fontWeight="400" fontSize={["20px", "20px", "24px"]} lineHeight={["30px", "30px", "36px"]} align="justify">
+        <Flex
+          align={["center", "flex-end"]}
+          justify={["center", "flex-start"]}
+          maxW="1160px"
+          w="100%"
+          mx="auto"
+          pl={["0px", "70px", "140px"]}
+        >
+
+          <Text
+            color="white"
+            fontWeight="600"
+            fontSize={["20px", "32px", "48px"]}
+            lineHeight={["30px", "30px", "72px"]}
+            mb={[0, 16]}
+          >
+            {props.continent.name}
+
+          </Text>
+        </Flex>
+
+      </Flex>
+
+      <Flex direction="column" my="80px" mx={["3%", "4%", "5%", "9%"]} >
+        <Flex direction={["column", "column", "column", "row"]} mb={["20px", "20px", "3rem"]}>
+          <Text
+            mr={["0px", "0px", "0px", "70px"]}
+            fontWeight="400"
+            fontSize={["20px", "20px", "24px"]}
+            lineHeight={["30px", "30px", "36px"]}
+            align="justify"
+          >
             A Europa é, por convenção, um dos seis continentes do mundo. Compreendendo a península ocidental da Eurásia, a Europa geralmente divide-se da Ásia a leste pela divisória de águas dos montes Urais, o rio Ural, o mar Cáspio, o Cáucaso, e o mar Negro a sudeste.
-      </Text>
-          <Flex>
+          </Text>
+          <Flex
+            align="center"
+            justify="center"
+            direction={["row"]}
+            mt={["20px", "20px", "48px", "0px"]}
+          >
 
             <Flex mr="50px" direction="column">
               <Text align="center" color="yellow.400" fontSize="48px" fontWeight="600" lineHeight="62px">
@@ -120,14 +140,6 @@ export default function Home(props: HomeProps) {
 
 export async function getStaticProps() {
 
-  /*   let response;
-  
-    try {
-      response = await unsplashApi.photos
-        .get({ photoId: "EXdXLrZXS9Q" });
-    } catch {
-      console.log("something went wrong!");
-    } */
   let continent = await api.get('/continents/1')
     .then(
       (response) => { return response.data; }

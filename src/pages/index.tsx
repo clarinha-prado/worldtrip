@@ -21,8 +21,6 @@ SwiperCore.use([Navigation, Pagination, Autoplay]);
 
 export default function Home(props: HomeProps) {
 
-  console.log("props recebidas - item 0: ", props.continents[0]);
-
   const isWideVersion = useBreakpointValue({
     base: false,
     md: true

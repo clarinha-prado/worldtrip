@@ -1,8 +1,8 @@
-import { useBreakpointValue, Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/react';
 import { Header } from '../../components/Header';
 import { unsplashApi } from '../../services/upsplash';
 import { RiInformationLine } from 'react-icons/ri';
-import { api } from '../../services/api';
+import { axiosApi } from '../../services/axios';
 import { CityList } from '../../components/CityList';
 
 interface HomeProps {
@@ -23,7 +23,7 @@ interface ContinentProps {
   id: number;
   name: string;
   subtitle: string;
-  photoHomePageId: string;
+  imageUrl: string;
   countriesQtt: number;
   idiomsQtt: number;
   cities100Qtt: number;
@@ -31,11 +31,6 @@ interface ContinentProps {
 }
 
 export default function Home(props: HomeProps) {
-
-  const isWideVersion = useBreakpointValue({
-    base: false,
-    md: true
-  })
 
   let bannerEurope = "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMjEwNzZ8MHwxfGFsbHx8fHx8fHx8fDE2MTc4MzIzNjc&ixlib=rb-1.2.1&q=80&w=1080";
 
@@ -49,7 +44,6 @@ export default function Home(props: HomeProps) {
         bgPosition={["100% 40%", "100% 50%"]}
         bgRepeat="no-repeat"
         bgSize="cover"
-        class="teste"
       >
 
         <Flex
@@ -155,13 +149,13 @@ export async function getStaticPaths() {
       // só gerar em tempo de build a página Europa
       { params: { id: '1' } }
     ],
-    fallback: true
+    fallback: false  // false retorna 404 para páginas q ñ estão no 'paths'
   };
 }
 
 export async function getStaticProps() {
 
-  let continent = await api.get('/continents/1')
+  let continent = await axiosApi.get('/continents/1')
     .then(
       (response) => { return response.data; }
     ).catch(

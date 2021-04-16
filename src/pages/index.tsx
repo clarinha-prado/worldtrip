@@ -1,19 +1,27 @@
 import { Image, useBreakpointValue, Flex, Box, Divider, Text, Link, Wrap, WrapItem } from '@chakra-ui/react';
 import { Header } from '../components/Header';
-import styles from '../styles/home.module.scss';
 import { NavLink } from '../components/NavLink';
-import { unsplashApi, PhotoProps } from '../services/upsplash';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination, Autoplay } from 'swiper';
 import 'swiper/swiper-bundle.css';
+import { axiosApi } from '../services/axios';
+
+interface ContinentProps {
+  id: number,
+  name: string,
+  subtitle: string,
+  imageUrl: string
+}
 
 interface HomeProps {
-  photo: PhotoProps;
+  continents: ContinentProps[]
 }
 
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 
 export default function Home(props: HomeProps) {
+
+  console.log("props recebidas - item 0: ", props.continents[0]);
 
   const isWideVersion = useBreakpointValue({
     base: false,
@@ -31,41 +39,8 @@ export default function Home(props: HomeProps) {
   };
 
   const slides = [];
-  const continentsInfo = [
+  const continentsInfo = props.continents;
 
-    {
-      title: "América do Norte",
-      subtitle: "A modernidade das metrópoles",
-      imageUrl: "https://images.unsplash.com/photo-1570897620600-f5f649e4968c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMjEwNzZ8MHwxfGFsbHx8fHx8fHx8fDE2MTc4MTMxNzk&ixlib=rb-1.2.1&q=80&w="
-    },
-
-    {
-      title: "América do Sul",
-      subtitle: "A violência da colonização",
-      imageUrl: "https://images.unsplash.com/photo-1589228710553-095226fc298b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMjEwNzZ8MHwxfGFsbHx8fHx8fHx8fDE2MTc4MTMzNDU&ixlib=rb-1.2.1&q=80&w="
-    },
-
-    {
-      title: "Ásia",
-      subtitle: "Cultura milenar",
-      imageUrl: "https://images.unsplash.com/photo-1513415756790-2ac1db1297d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMjEwNzZ8MHwxfGFsbHx8fHx8fHx8fDE2MTc4MTM2Mjc&ixlib=rb-1.2.1&q=80&w="
-    },
-    {
-      title: "África",
-      subtitle: "Natureza intocada",
-      imageUrl: "https://images.unsplash.com/photo-1528277342758-f1d7613953a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMjEwNzZ8MHwxfGFsbHx8fHx8fHx8fDE2MTc4MTM3NjU&ixlib=rb-1.2.1&q=80&w="
-    },
-    {
-      title: "Europa",
-      subtitle: "O continente mais antigo",
-      imageUrl: "https://images.unsplash.com/photo-1520114878144-6123749968dd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMjEwNzZ8MHwxfGFsbHx8fHx8fHx8fDE2MTc4MTI3OTc&ixlib=rb-1.2.1&q=80&w="
-    },
-    {
-      title: "Oceania",
-      subtitle: "A maravilha das ilhas",
-      imageUrl: "https://images.unsplash.com/photo-1572295215355-60431b92883f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMjEwNzZ8MHwxfGFsbHx8fHx8fHx8fDE2MTc4MTM4Njk&ixlib=rb-1.2.1&q=80&w="
-    },
-  ]
   for (let i = 0; i < 6; i += 1) {
     slides.push(
 
@@ -79,9 +54,9 @@ export default function Home(props: HomeProps) {
           style={{ filter: "brightness(60%)" }}
         />
         <Box w="100%" position="absolute" top={["80px", "140px", "180px"]} >
-          <Link style={{ textDecoration: "none" }} href="/continents/1">
+          <Link style={{ textDecoration: "none" }} href={`/continents/${continentsInfo[i].id}`}>
             <Text align="center" lineHeight={["36px", "48px", "72px"]} color="white" fontWeight="700" fontSize={["24px", "36px", "48px"]}>
-              {continentsInfo[i].title}
+              {continentsInfo[i].name}
             </Text>
             <Text align="center" lineHeight={["21px", "15px", "36px"]} color="white" fontWeight="700" fontSize={["14px", "19px", "24px"]}>
               {continentsInfo[i].subtitle}
@@ -154,20 +129,17 @@ export default function Home(props: HomeProps) {
 
 export async function getStaticProps() {
 
-  let response;
-
-  try {
-    response = await unsplashApi.photos
-      .get({ photoId: "cOT7bImb07A" });
-  } catch (err) {
-    console.log("erro na busca de imagem: " + err.message);
-  }
+  let continents = await axiosApi.get('/continents')
+    .then(
+      (response) => { return response.data; }
+    ).catch(
+      (err) => { console.log("deu erro na busca dos dados no json server: " + err.message) }
+    )
 
   return {
     props: {
-      photo: response.response,
+      continents,
     },
-
     revalidate: 60 * 60 * 24 * 7 // 1 semana
   }
 }

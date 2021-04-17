@@ -149,7 +149,7 @@ export async function getStaticPaths() {
       // só gerar em tempo de build a página Europa
       { params: { id: '1' } }
     ],
-    fallback: false  // false retorna 404 para páginas q ñ estão no 'paths'
+    fallback: 'blocking'  // false retorna 404 para páginas q ñ estão no 'paths'
   };
 }
 
@@ -159,7 +159,10 @@ export async function getStaticProps() {
     .then(
       (response) => { return response.data; }
     ).catch(
-      (err) => { console.log("deu erro na busca dos dados no json server: " + err.message) }
+      (err) => {
+        console.log("deu erro na busca dos dados no json server: " + err.message +
+          "\n será q vc inicializou o servidor? json-server db.json --port 3001")
+      }
     )
 
   // busca foto das cidades
